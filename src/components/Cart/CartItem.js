@@ -1,26 +1,23 @@
-import React from 'react'
-import styles from './CartItem.module.css'
+import classes from './CartItem.module.css';
 
 const CartItem = (props) => {
+  const price = `$${props.price.toFixed(2)}`;
 
-    const mealsList = props.DUMMY_MEALS.map(meal =>
-        <div className={styles['cart-item']}>
-            <li><h2>{meal.name}</h2></li>
-            <li className={styles.summary}> {meal.description}</li>
-            <li className={styles.price}> {meal.price}</li>
-            <div>
-                <h2> Amount</h2> <input type="number" id="amount" name ="amount" value ="1"></input>
-            </div>
-            <button> Add</button>
+  return (
+    <li className={classes['cart-item']}>
+      <div>
+        <h2>{props.name}</h2>
+        <div className={classes.summary}>
+          <span className={classes.price}>{price}</span>
+          <span className={classes.amount}>x {props.amount}</span>
         </div>
-    );
-
-    return (
-        <div>
-            <ul>
-                {mealsList}
-            </ul>
-        </div>
-    )
+      </div>
+      <div className={classes.actions}>
+        <button onClick={props.onRemove}>-</button>
+        <button onClick={props.onAdd}>+</button>
+      </div>
+    </li>
+  );
 };
+
 export default CartItem;
